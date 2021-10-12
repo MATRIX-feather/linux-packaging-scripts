@@ -33,6 +33,12 @@ download_repo msa https://github.com/minecraft-linux/msa-manifest.git $(cat msa.
 download_repo mcpelauncher https://github.com/minecraft-linux/mcpelauncher-manifest.git $(cat mcpelauncher.commit)
 download_repo mcpelauncher-ui https://github.com/minecraft-linux/mcpelauncher-ui-manifest.git $(cat mcpelauncher-ui.commit)
 
+#patch nvidia-offload
+cd source/mcpelauncher
+wget https://gist.githubusercontent.com/kanafutile/d77b5b89ff2c2aa32c77fa57e12bfc1f/raw/e7a2e06ee7eb56ca9b5649a880e509051f63ea10/eglut_from_mesa_demos.patch
+patch eglut/src/eglut.c eglut_from_mesa_demos.patch
+cd ../..
+
 call_quirk build_start
 
 reset_cmake_options
