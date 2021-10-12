@@ -47,6 +47,12 @@ download_repo mcpelauncher-ui https://github.com/minecraft-linux/mcpelauncher-ui
 mkdir -p "$SOURCE_DIR/mcpelauncher-ui/lib/AppImageUpdate"
 git clone --recursive https://github.com/AppImage/AppImageUpdate "$SOURCE_DIR/mcpelauncher-ui/lib/AppImageUpdate" || cd "$SOURCE_DIR/mcpelauncher-ui/lib/AppImageUpdate" && git pull && git submodule update --init --recursive
 
+#patch nvidia-offload
+cd source/mcpelauncher
+wget https://gist.githubusercontent.com/kanafutile/d77b5b89ff2c2aa32c77fa57e12bfc1f/raw/e7a2e06ee7eb56ca9b5649a880e509051f63ea10/eglut_from_mesa_demos.patch
+patch eglut/src/eglut.c eglut_from_mesa_demos.patch
+cd ../..
+
 call_quirk build_start
 
 install_component() {
